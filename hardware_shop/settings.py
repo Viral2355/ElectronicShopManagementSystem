@@ -11,11 +11,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # =========================
 # SECURITY SETTINGS
 # =========================
-SECRET_KEY = 'django-insecure-change-this-secret-key'
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+ALLOWED_HOSTS = ['.onrender.com']
+#SECRET_KEY = 'django-insecure-change-this-secret-key'
 
-DEBUG = True
+#DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+#ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # =========================
