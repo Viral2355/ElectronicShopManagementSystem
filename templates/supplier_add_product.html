@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Supplier Panel | Add Product | Electronics_Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+ --primary:#00e5ff;
+ --accent:#00ffcc;
+ --glass:rgba(255,255,255,0.12);
+}
+*{font-family:'Poppins',sans-serif}
+
+body{
+ background:
+ linear-gradient(rgba(0,0,0,.85),rgba(0,0,0,.95)),
+ url("https://images.unsplash.com/photo-1518770660439-4636190af475") center/cover fixed;
+ min-height:100vh;
+ color:#fff;
+}
+
+/* CARD */
+.glass-card{
+ background:var(--glass);
+ backdrop-filter:blur(20px);
+ border-radius:28px;
+ padding:45px;
+ box-shadow:0 35px 90px rgba(0,0,0,.8);
+ animation:fadeUp .7s ease;
+}
+
+@keyframes fadeUp{
+ from{opacity:0;transform:translateY(25px)}
+ to{opacity:1;transform:translateY(0)}
+}
+
+.form-label{font-weight:600}
+
+.form-control,.form-select{
+ background:rgba(0,0,0,.45);
+ border:none;
+ color:#fff;
+ border-radius:16px;
+ padding:14px;
+}
+
+.form-control::placeholder{color:#bbb}
+
+.form-control:focus,.form-select:focus{
+ outline:none;
+ box-shadow:0 0 0 2px var(--primary);
+ background:rgba(0,0,0,.6);
+}
+
+/* IMAGE UPLOAD */
+.upload-box{
+ border:2px dashed var(--primary);
+ border-radius:20px;
+ padding:30px;
+ text-align:center;
+ cursor:pointer;
+ transition:.3s;
+}
+.upload-box:hover{
+ background:rgba(0,229,255,.08);
+}
+
+.preview-img{
+ width:100%;
+ max-height:220px;
+ object-fit:contain;
+ margin-top:18px;
+ display:none;
+}
+
+/* BUTTON */
+.btn-main{
+ background:linear-gradient(135deg,var(--primary),#0072ff);
+ border:none;
+ font-weight:700;
+ padding:15px;
+ border-radius:18px;
+ color:#00343d;
+}
+.btn-main:hover{
+ opacity:.9;
+}
+
+/* STATUS BADGE */
+.status-badge{
+ background:#facc15;
+ color:#000;
+ font-weight:600;
+ border-radius:30px;
+ padding:8px 18px;
+ display:inline-block;
+ margin-bottom:18px;
+}
+
+/* TOAST */
+.toast-box{
+ position:fixed;
+ bottom:30px;
+ right:30px;
+ background:#101820;
+ padding:22px 26px;
+ border-left:6px solid var(--accent);
+ border-radius:20px;
+ display:flex;
+ gap:14px;
+ align-items:center;
+ box-shadow:0 25px 60px rgba(0,0,0,.7);
+ transform:translateX(120%);
+ transition:.5s;
+ z-index:999;
+}
+.toast-box.show{transform:translateX(0)}
+
+.toast-icon{
+ width:44px;height:44px;
+ border-radius:50%;
+ background:var(--accent);
+ color:#000;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:22px;
+ animation:pop .4s ease;
+}
+
+@keyframes pop{
+ 0%{transform:scale(0)}
+ 80%{transform:scale(1.2)}
+ 100%{transform:scale(1)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container d-flex align-items-center justify-content-center" style="min-height:100vh">
+ <div class="col-lg-6">
+
+  <div class="glass-card">
+
+   <div class="text-center">
+    <span class="status-badge">
+     ⏳ Pending Admin Approval
+    </span>
+
+    <h2 class="mb-2">
+     <i class="bi bi-cpu"></i> Add Electronics Product
+    </h2>
+
+    <p class="text-light">
+     Submit product details — admin will review & publish on Viral Electronics
+    </p>
+   </div>
+
+   {% for msg in messages %}
+    <div class="alert alert-warning text-center mt-3">{{ msg }}</div>
+   {% endfor %}
+
+   <form id="sellerForm" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="mb-3">
+     <label class="form-label">Product Name</label>
+     <input name="name" class="form-control"
+            placeholder="e.g. Samsung Galaxy S24 / Noise Smartwatch" required>
+    </div>
+
+    <div class="mb-3">
+     <label class="form-label">Category</label>
+     <select name="category" class="form-select" required>
+      <option value="">Select Category</option>
+      {% for cat in categories %}
+      <option value="{{ cat.id }}">{{ cat.name }}</option>
+      {% endfor %}
+     </select>
+    </div>
+
+    <div class="row">
+     <div class="col-md-6 mb-3">
+      <label class="form-label">Price (₹)</label>
+      <input type="number" step="0.01"
+             name="price" class="form-control" required>
+     </div>
+
+     <div class="col-md-6 mb-3">
+      <label class="form-label">Stock</label>
+      <input type="number"
+             name="stock" class="form-control" required>
+     </div>
+    </div>
+
+    <label class="form-label">Product Image</label>
+    <div class="upload-box" onclick="fileInput.click()">
+     <i class="bi bi-cloud-arrow-up fs-1"></i>
+     <p class="mt-2">Click to upload electronics product image</p>
+     <input type="file" name="image" id="fileInput" hidden accept="image/*">
+     <img id="preview" class="preview-img">
+    </div>
+
+    <button class="btn btn-main w-100 mt-4">
+     🚀 Submit for Approval
+    </button>
+   </form>
+
+  </div>
+ </div>
+</div>
+
+<!-- SUCCESS TOAST -->
+<div id="toast" class="toast-box">
+ <div class="toast-icon">✔</div>
+ <div>
+  <strong>Submitted Successfully</strong><br>
+  Awaiting admin approval
+ </div>
+</div>
+
+<script>
+const fileInput=document.getElementById("fileInput");
+const preview=document.getElementById("preview");
+
+fileInput.onchange=e=>{
+ const f=e.target.files[0];
+ if(f){
+  preview.src=URL.createObjectURL(f);
+  preview.style.display="block";
+ }
+};
+
+const form=document.getElementById("sellerForm");
+const toast=document.getElementById("toast");
+
+form.onsubmit=e=>{
+ e.preventDefault();
+ const fd=new FormData(form);
+
+ fetch("",{
+  method:"POST",
+  body:fd,
+  headers:{
+   "X-CSRFToken":fd.get("csrfmiddlewaretoken")
+  }
+ })
+ .then(()=>{
+  toast.classList.add("show");
+  form.reset();
+  preview.style.display="none";
+  setTimeout(()=>toast.classList.remove("show"),3000);
+ });
+};
+</script>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{ product.name }} | Electronics_Shop Supplier</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#00e5ff;
+  --success:#22c55e;
+  --approved:#38bdf8;
+  --pending:#facc15;
+}
+
+body{
+  background:radial-gradient(circle at top,#0b0f1a,#020617);
+  color:#fff;
+  font-family:'Poppins',sans-serif;
+}
+
+/* GLASS CARD */
+.glass{
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(22px);
+  border-radius:30px;
+  padding:40px;
+  box-shadow:0 50px 140px rgba(0,0,0,.9);
+  animation:fadeUp .7s ease;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* IMAGE */
+.product-img{
+  background:#fff;
+  border-radius:22px;
+  padding:20px;
+}
+.product-img img{
+  width:100%;
+  height:320px;
+  object-fit:contain;
+}
+
+/* BADGES */
+.badge-live{background:var(--success);color:#000}
+.badge-approved{background:var(--approved);color:#000}
+.badge-pending{background:var(--pending);color:#000}
+
+/* BUTTON */
+.btn-publish{
+  background:linear-gradient(135deg,var(--primary),#0ea5e9);
+  border:none;
+  font-weight:600;
+  padding:12px 28px;
+  border-radius:16px;
+  transition:.3s;
+}
+.btn-publish:hover{
+  box-shadow:0 0 25px rgba(0,229,255,.8);
+  transform:translateY(-2px);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container py-5">
+
+  <div class="glass">
+
+    <!-- TOP BAR -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h4 class="fw-bold">⚡ Supplier Product Details</h4>
+
+      <a href="{% url 'supplier_dashboard' %}"
+         class="btn btn-outline-light btn-sm">
+        ⬅ Back to Seller Dashboard
+      </a>
+    </div>
+
+    <div class="row g-5 align-items-center">
+
+      <!-- IMAGE -->
+      <div class="col-md-5">
+        <div class="product-img">
+          <img src="{{ product.image.url }}">
+        </div>
+      </div>
+
+      <!-- DETAILS -->
+      <div class="col-md-7">
+        <h3 class="fw-bold">{{ product.name }}</h3>
+        <h4 class="text-info mt-2">₹ {{ product.price }}</h4>
+
+        <p class="mt-3 text-light">
+          Seller-listed electronic product. Visible to customers only after publishing to the main store.
+        </p>
+
+        <p><b>Stock Available:</b> {{ product.stock }}</p>
+        <p><b>Category:</b> {{ product.category.name }}</p>
+
+        <!-- STATUS -->
+        <div class="mt-3">
+          {% if product.is_published %}
+            <span class="badge badge-live px-3 py-2">LIVE ON STORE</span>
+          {% elif product.is_approved %}
+            <span class="badge badge-approved px-3 py-2">APPROVED (NOT LIVE)</span>
+          {% else %}
+            <span class="badge badge-pending px-3 py-2">PENDING ADMIN APPROVAL</span>
+          {% endif %}
+        </div>
+
+        <!-- ACTION -->
+        {% if product.is_approved and not product.is_published %}
+          <a href="{% url 'publish_product' product.id %}"
+             class="btn btn-publish mt-4">
+            🚀 Publish to Store
+          </a>
+        {% endif %}
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

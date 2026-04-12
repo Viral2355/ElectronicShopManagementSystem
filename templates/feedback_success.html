@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Thank You | Electronics_Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+ --primary:#00e5ff;
+ --secondary:#0072ff;
+ --glass:rgba(255,255,255,.14);
+}
+
+body{
+ height:100vh;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ background:radial-gradient(circle at top,#0b0f1a,#020617 70%);
+ font-family:'Poppins',sans-serif;
+ color:#fff;
+ overflow:hidden;
+}
+
+/* CARD */
+.success-card{
+ max-width:720px;
+ text-align:center;
+ background:var(--glass);
+ backdrop-filter:blur(22px);
+ border-radius:30px;
+ padding:70px 50px;
+ box-shadow:0 50px 140px rgba(0,0,0,.9);
+ animation:popIn 1s ease;
+}
+
+@keyframes popIn{
+ from{opacity:0;transform:scale(.85) translateY(40px)}
+ to{opacity:1;transform:none}
+}
+
+/* CHECK ICON */
+.check{
+ width:110px;
+ height:110px;
+ border-radius:50%;
+ margin:0 auto 25px;
+ background:linear-gradient(135deg,var(--primary),var(--secondary));
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:3.5rem;
+ box-shadow:0 0 40px rgba(0,229,255,.9);
+ animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+ 0%{box-shadow:0 0 20px rgba(0,229,255,.6)}
+ 50%{box-shadow:0 0 55px rgba(0,229,255,1)}
+ 100%{box-shadow:0 0 20px rgba(0,229,255,.6)}
+}
+
+/* BUTTON */
+.btn-main{
+ background:linear-gradient(135deg,var(--primary),var(--secondary));
+ border:none;
+ border-radius:50px;
+ padding:14px 40px;
+ font-weight:700;
+ color:#000;
+ transition:.4s;
+}
+.btn-main:hover{
+ transform:translateY(-3px);
+ box-shadow:0 0 30px rgba(0,229,255,.9);
+}
+
+/* CONFETTI */
+.confetti{
+ position:absolute;
+ width:12px;
+ height:12px;
+ animation:fall linear infinite;
+ opacity:.85;
+}
+
+@keyframes fall{
+ from{transform:translateY(-120px) rotate(0deg)}
+ to{transform:translateY(120vh) rotate(360deg)}
+}
+</style>
+</head>
+
+<body>
+
+<!-- CONFETTI SCRIPT -->
+<script>
+for(let i=0;i<60;i++){
+ let c=document.createElement("div");
+ c.className="confetti";
+ c.style.left=Math.random()*100+"vw";
+ c.style.animationDuration=3+Math.random()*4+"s";
+ c.style.background=["#00e5ff","#22c55e","#facc15","#38bdf8"][Math.floor(Math.random()*4)];
+ document.body.appendChild(c);
+}
+</script>
+
+<div class="success-card">
+
+  <div class="check">✔</div>
+
+  <h1 class="fw-bold mb-3">Thank You!</h1>
+
+  <p class="fs-5 text-light mb-4">
+    Your feedback has been successfully submitted.<br>
+    You're helping us build a smarter and better <strong>Viral Electronics</strong> ⚡
+  </p>
+
+  <p class="text-muted mb-5">
+    Every suggestion matters — our team reviews all feedback carefully.
+  </p>
+
+  <div class="d-flex justify-content-center gap-3 flex-wrap">
+    <a href="{% url 'dashboard' %}" class="btn btn-main">
+      🏠 Go to Home
+    </a>
+    <a href="{% url 'products' %}" class="btn btn-outline-light btn-lg">
+      🛒 Explore Products
+    </a>
+  </div>
+
+</div>
+
+</body>
+</html>

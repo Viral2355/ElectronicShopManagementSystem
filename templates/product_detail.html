@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{ product.name }} | Electronics_Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap & Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+  background:radial-gradient(circle at top,#0b0f1a,#020617);
+  color:#fff;
+  font-family:'Poppins',sans-serif;
+}
+
+/* GLASS CARD */
+.glass{
+  background:rgba(255,255,255,.10);
+  backdrop-filter:blur(20px);
+  border-radius:28px;
+  padding:40px;
+  box-shadow:0 40px 100px rgba(0,0,0,.8);
+}
+
+/* IMAGE */
+.product-img{
+  background:#fff;
+  border-radius:22px;
+  padding:25px;
+}
+.product-img img{
+  width:100%;
+  height:320px;
+  object-fit:contain;
+}
+
+/* PRICE */
+.price{
+  color:#00c6ff;
+  font-weight:700;
+  font-size:1.8rem;
+}
+
+/* BUTTONS */
+.btn-cart{
+  background:linear-gradient(90deg,#00c6ff,#0072ff);
+  border:none;
+  color:#fff;
+  border-radius:50px;
+  padding:14px 30px;
+  font-weight:600;
+}
+.btn-cart:hover{
+  box-shadow:0 0 25px rgba(0,198,255,.7);
+}
+
+.btn-buy-now{
+  background:linear-gradient(135deg,#00c6ff,#0072ff);
+  color:#fff;
+  border:none;
+  border-radius:40px;
+  padding:12px 34px;
+  font-weight:600;
+  transition:.35s;
+}
+.btn-buy-now:hover{
+  box-shadow:0 0 28px rgba(0,198,255,.9);
+  transform:translateY(-2px);
+  color:#fff;
+}
+
+/* CLOSE BUTTON */
+.close-btn{
+  position:absolute;
+  top:25px;
+  right:25px;
+  background:rgba(255,255,255,.15);
+  border:none;
+  color:#fff;
+  font-size:20px;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  text-align:center;
+  line-height:42px;
+}
+.close-btn:hover{
+  background:#dc3545;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container py-5 position-relative">
+
+  <!-- CLOSE -->
+  <a href="{% url 'products' %}" class="close-btn text-decoration-none">
+    ✕
+  </a>
+
+  <div class="glass">
+
+    <div class="row g-5 align-items-center">
+
+      <!-- IMAGE -->
+      <div class="col-md-5">
+        <div class="product-img">
+          <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        </div>
+      </div>
+
+      <!-- DETAILS -->
+      <div class="col-md-7">
+
+        <h2 class="fw-bold mb-2">{{ product.name }}</h2>
+        <div class="price mb-3">₹ {{ product.price }}</div>
+
+        <p class="text-light">
+          Genuine electronic product with brand warranty.
+          Designed for performance, reliability and smart usage.
+        </p>
+
+        <div class="row mt-4">
+          <div class="col-sm-6">
+            <p><b>Category:</b> {{ product.category.name }}</p>
+          </div>
+          <div class="col-sm-6">
+            <p>
+              <b>Stock:</b>
+              {% if product.stock > 0 %}
+                <span class="text-success">Available</span>
+              {% else %}
+                <span class="text-danger">Out of Stock</span>
+              {% endif %}
+            </p>
+          </div>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="d-flex flex-wrap gap-3 mt-4">
+
+          <a href="{% url 'add_to_cart' product.id %}"
+             class="btn btn-cart btn-lg"
+             {% if product.stock <= 0 %}style="pointer-events:none;opacity:.6"{% endif %}>
+            <i class="bi bi-cart-plus"></i> Add to Cart
+          </a>
+
+          <a href="{% url 'buy_now' product.id %}"
+             class="btn btn-buy-now btn-lg"
+             {% if product.stock <= 0 %}style="pointer-events:none;opacity:.6"{% endif %}>
+            ⚡ Buy Now
+          </a>
+
+        </div>
+
+        <!-- TRUST SECTION -->
+        <div class="mt-5 text-muted small">
+          ✔ Secure checkout &nbsp; • &nbsp; ✔ Authorized seller
+          <br>
+          ✔ Fast delivery &nbsp; • &nbsp; ✔ Easy returns
+          <br>
+          ✔ Brand warranty available
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

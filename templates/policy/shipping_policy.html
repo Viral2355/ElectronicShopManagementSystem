@@ -1,0 +1,281 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Shipping & Delivery Policy | Viral Electronics</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#00e5ff;
+  --accent:#22c55e;
+  --glass:rgba(255,255,255,.12);
+}
+*{font-family:'Poppins',sans-serif}
+
+body{
+  background:radial-gradient(circle at top,#0b0f1a,#020617 75%);
+  color:#e5e7eb;
+}
+
+/* NAVBAR */
+.navbar{
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(18px);
+  box-shadow:0 10px 40px rgba(0,0,0,.9);
+}
+
+/* HERO */
+.hero{
+  padding:160px 0 90px;
+  text-align:center;
+}
+.hero h1{
+  font-weight:700;
+  font-size:3rem;
+  color:var(--primary);
+}
+.hero p{
+  max-width:760px;
+  margin:auto;
+  color:#94a3b8;
+}
+
+/* PROMISE STRIP */
+.promise{
+  background:rgba(255,255,255,.08);
+  border-radius:28px;
+  padding:40px;
+  margin-top:-50px;
+  box-shadow:0 30px 80px rgba(0,0,0,.9);
+}
+.promise i{
+  font-size:36px;
+  color:var(--primary);
+}
+
+/* POLICY BOX */
+.policy-box{
+  background:var(--glass);
+  backdrop-filter:blur(22px);
+  border-radius:32px;
+  padding:60px;
+  margin-top:80px;
+  box-shadow:0 45px 120px rgba(0,0,0,.9);
+  animation:fadeUp .9s ease;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:none}
+}
+
+.section{
+  margin-top:45px;
+}
+.section h4{
+  color:var(--primary);
+  font-weight:600;
+  margin-bottom:12px;
+}
+.section p, li{
+  color:#cbd5e1;
+  line-height:1.7;
+}
+.section ul{padding-left:20px}
+
+/* DELIVERY FLOW */
+.flow{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:24px;
+  margin-top:45px;
+}
+.flow-step{
+  background:rgba(255,255,255,.1);
+  border-radius:24px;
+  padding:28px;
+  text-align:center;
+  transition:.4s;
+}
+.flow-step:hover{
+  transform:translateY(-10px);
+  box-shadow:0 30px 80px rgba(0,0,0,.85);
+}
+.flow-step i{
+  font-size:38px;
+  color:var(--primary);
+  margin-bottom:12px;
+}
+
+/* NOTE */
+.note{
+  background:rgba(34,197,94,.14);
+  border-left:4px solid var(--accent);
+  padding:18px 22px;
+  border-radius:16px;
+  margin-top:45px;
+  color:#bbf7d0;
+}
+
+/* FOOTER */
+footer{
+  background:#000;
+  margin-top:100px;
+}
+footer a{
+  color:#94a3b8;
+  text-decoration:none;
+  margin:0 8px;
+}
+footer a:hover{color:var(--primary)}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-info" href="{% url 'dashboard' %}">
+      ⚡ Viral Electronics
+    </a>
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="nav-link text-light" href="{% url 'dashboard' %}">Home</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <h1>Shipping & Delivery Policy</h1>
+    <p class="mt-3">
+      Fast, transparent and secure shipping — ensuring your electronics
+      reach you safely and on time.
+    </p>
+  </div>
+</section>
+
+<!-- PROMISE STRIP -->
+<div class="container">
+  <div class="promise row text-center g-4">
+    <div class="col-md-4">
+      <i class="bi bi-truck"></i>
+      <h6 class="mt-2">Quick Dispatch</h6>
+      <small>Within 24–48 hours</small>
+    </div>
+    <div class="col-md-4">
+      <i class="bi bi-geo-alt"></i>
+      <h6 class="mt-2">India-Wide Delivery</h6>
+      <small>Metro & non-metro coverage</small>
+    </div>
+    <div class="col-md-4">
+      <i class="bi bi-shield-check"></i>
+      <h6 class="mt-2">Secure Packaging</h6>
+      <small>Safe electronics handling</small>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+  <div class="policy-box">
+
+    <p class="text-muted">Effective Date: January 2026</p>
+
+    <div class="section">
+      <h4>1. Order Processing</h4>
+      <p>
+        Orders are processed within <strong>24–48 business hours</strong>
+        after payment confirmation (excluding weekends & holidays).
+      </p>
+    </div>
+
+    <div class="section">
+      <h4>2. Estimated Delivery Timelines</h4>
+      <ul>
+        <li>Metro cities: <b>3–5 business days</b></li>
+        <li>Non-metro cities: <b>5–7 business days</b></li>
+        <li>Remote areas: <b>7–10 business days</b></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h4>3. Shipping Coverage</h4>
+      <p>
+        Viral Electronics currently delivers across major regions in India.
+        International shipping may be introduced in future updates.
+      </p>
+    </div>
+
+    <div class="section">
+      <h4>4. Shipping Charges</h4>
+      <p>
+        Any applicable shipping charges are clearly displayed
+        during checkout before final payment.
+      </p>
+    </div>
+
+    <div class="section">
+      <h4>5. Delays & Exceptions</h4>
+      <p>
+        Delays may occur due to weather conditions, courier constraints,
+        high-demand sales periods or unforeseen circumstances.
+      </p>
+    </div>
+
+    <!-- DELIVERY FLOW -->
+    <div class="flow">
+      <div class="flow-step">
+        <i class="bi bi-bag-check"></i>
+        <h6>Order Confirmed</h6>
+        <small class="text-muted">Payment verified</small>
+      </div>
+      <div class="flow-step">
+        <i class="bi bi-box-seam"></i>
+        <h6>Packed & Dispatched</h6>
+        <small class="text-muted">Within 48 hours</small>
+      </div>
+      <div class="flow-step">
+        <i class="bi bi-truck"></i>
+        <h6>In Transit</h6>
+        <small class="text-muted">Live tracking available</small>
+      </div>
+      <div class="flow-step">
+        <i class="bi bi-house-check"></i>
+        <h6>Delivered</h6>
+        <small class="text-muted">At your doorstep</small>
+      </div>
+    </div>
+
+    <div class="note">
+      📦 Our logistics partners follow strict handling guidelines
+      to ensure safe delivery of electronic products.
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="text-center py-4">
+  <div class="mb-2">
+    <a href="{% url 'privacy_policy' %}">Privacy</a>•
+    <a href="{% url 'terms' %}">Terms</a>•
+    <a href="{% url 'refund_policy' %}">Refund</a>•
+    <a href="{% url 'shipping_policy' %}">Shipping</a>•
+    <a href="{% url 'cookie_policy' %}">Cookies</a>
+  </div>
+  <div class="text-muted small">
+    © 2026 Viral Electronics • Fast • Reliable • Transparent
+  </div>
+</footer>
+
+</body>
+</html>

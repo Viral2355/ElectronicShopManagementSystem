@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Customer Reviews | Electronics_Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+ background:radial-gradient(circle at top,#0b0f1a,#020617);
+ color:#fff;
+ font-family:'Poppins',sans-serif;
+}
+
+/* TITLE */
+.page-title{
+ font-weight:700;
+ color:#00e5ff;
+}
+
+/* REVIEW CARD */
+.review{
+ background:rgba(255,255,255,.08);
+ backdrop-filter:blur(16px);
+ border-radius:22px;
+ padding:28px;
+ box-shadow:0 25px 60px rgba(0,0,0,.7);
+ transition:.4s;
+ height:100%;
+}
+.review:hover{
+ transform:translateY(-10px);
+ box-shadow:0 35px 80px rgba(0,229,255,.4);
+}
+
+/* STAR */
+.star{
+ color:#facc15;
+ font-size:18px;
+}
+
+/* DATE */
+.review small{
+ opacity:.7;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container py-5">
+
+<h2 class="text-center mb-5 page-title">
+ ⭐ What Our Electronics Customers Say
+</h2>
+
+<div class="row g-4">
+
+{% for r in reviews %}
+<div class="col-md-4">
+ <div class="review">
+
+  <h3 class="mb-3">{{ r.emoji }}</h3>
+
+  <!-- Rating -->
+  <p class="mb-3">
+   {% for i in "12345"|slice:":r.rating" %}
+    <span class="star">★</span>
+   {% endfor %}
+  </p>
+
+  <!-- Liked Points -->
+  <ul>
+   {% for p in r.liked_list %}
+    <li>{{ p }}</li>
+   {% endfor %}
+  </ul>
+
+  <hr class="border-secondary">
+
+  <small>
+   📅 {{ r.created_at|date:"d M Y" }}
+  </small>
+
+ </div>
+</div>
+{% endfor %}
+
+</div>
+
+</div>
+
+</body>
+</html>
