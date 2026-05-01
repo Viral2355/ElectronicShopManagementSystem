@@ -16,13 +16,13 @@ This system provides a complete end-to-end solution for managing an electronic s
 ## 📸 Screenshots
 
 ### 🏠 Dashboard
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/dashboard.jpeg)
 
 ### 📱 Products Page
-![Products](screenshots/products.png)
+![Products](screenshots/products.jpeg)
 
 ### 🛒 Cart System
-![Cart](screenshots/cart.png)
+![Cart](screenshots/cart.jpeg)
 ✨ Key Features
 🔐 Secure User Authentication (Login/Register)
 📦 Product & Category Management
